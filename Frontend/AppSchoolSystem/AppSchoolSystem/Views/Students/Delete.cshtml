@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(function () {
+        var entries = [];
+        var dmJSON = "http://localhost:8383/api/students/delete/" + id;
+        $.getJSON(dmJSON, function (data) {
+            $.each(data.entries, function (i, f) {
+                var tblRow = "<tr>" + "<td>" + f.id + "</td>" + "<td>" + f.user.username + "</td>" + "<td>" + f.message + "</td>" + "<td> " + f.location + "</td>" + "<td>" + f.at + "</td>" + "</tr>"
+                $(tblRow).appendTo("#entrydata tbody");
+            });
+
+        });
+
+    });
+</script>
+<div class="col-md-8">
+    <h3>Delete Data Students</h3>
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Are you sure you want to delete this Student?</h3>
+        </div><!-- /.box-header -->
+        <div>
+
+            <dl class="dl-horizontal">
+                <dt>
+                  Name
+                </dt>
+
+                <dd>
+                    sdsd
+                </dd>
+
+                <dt>
+                    Kelas
+                </dt>
+
+                <dd>
+                   asds
+                </dd>
+
+                <dt>
+                    Tanggal Lahir
+                </dt>
+
+                <dd>
+                    sdsdsd
+                </dd>
+
+                <dt>
+                    Jenis Kelamin
+                </dt>
+
+                <dd>
+                    sdsd
+                </dd>
+
+            </dl>
+
+            <div class="box-header with-border">
+                @using (Html.BeginForm())
+            {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <button type="submit" value="Delete" class="btn btn-info pull-right" style="width: 78px">Delete</button>
+                        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-info", @style = "width: 78px" })
+                    </div>
+                }
+                </div>
+            </div>
+    </div>
+</div>

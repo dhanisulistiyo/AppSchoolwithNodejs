@@ -1,0 +1,14 @@
+{
+  "name": "appschool",
+  "version": "1.0.0",
+  "description": "App School System",
+  "main": "index.js",
+  "scripts": {
+    "test": "Test"
+  },
+  "author": "Team Basajans",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^2.2.21"
+  }
+}

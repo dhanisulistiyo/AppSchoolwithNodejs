@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Data Students</h3>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <a href="@Url.Action("Create","Students")"><span>Create</span></a>
+            @*@Html.ActionLink("Add New Students", "Create", "Students", null, new { @style = "font-size:22px;", @class = "popup" })*@
+            <div id="update_panel">
+                <div class="box-body">
+
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+         </div>
+      </div><!-- /.col -->
+</div><!-- /.row -->
