@@ -8,7 +8,7 @@
         <div class="box-header with-border">
             <h3 class="box-title">Form Create New Students</h3>
         </div><!-- /.box-header -->
-        @using (Html.BeginForm("Save", "Students", FormMethod.Post, new { role = "form", id = "saveForm" }))
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { role = "form", id = "saveForm" }))
         {
             @*here role = "form" for bootstrap design (optional) *@
             @Html.ValidationSummary(true)
