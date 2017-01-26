@@ -3,21 +3,41 @@
     LoadStudents();
     fDelete(studentId);
 
-    $('#detail').click(function(){
-        SearchStudents(id);
-        consolo.log(id);
-        });
-
-    $("body").on('submit', '#detail', function (e) {
-        e.preventDefault();
-        SearchStudents(id);
-    });
     //Save Students
     $("body").on('submit', '#saveForm', function (e) {
         e.preventDefault();
         console.log(id);
         SaveStudents();
     });
+
+
+    function SearchStudents(id) {
+        console.log(id);
+        window.location.href = '/Students/Details';
+        var studentI = {
+            id: id
+        };
+
+        $.ajax({
+            url: 'http://localhost:8383/api/students/search',
+            type: 'put',
+            dataType: 'json',
+            data: {
+                id: $('#id').val(),
+                '__RequestVerificationToken': $('input[name=__RequestVerificationToken]').val()
+            },
+            success: function (data) {
+                alert(data.message);
+                if (data.status) {
+                    $dialog.dialog('close');
+                }
+            },
+            error: function () {
+                $('#msg').html('<div class="failed">Error ! Please try again.</div>');
+            }
+        });
+    }
+
 });
 
 
@@ -60,7 +80,7 @@ function LoadStudents() {
                         $row.append($('<td/>').html(d.students[i].kelas));
                         $row.append($('<td/>').html(d.students[i].jenisKelamin));
                         //$row.append($('<td/>').html("<a href='/Students/Edit/" + d.students[i]._id + "' class='popup'>Edit</a>&nbsp;|&nbsp;<a href='http://localhost:8383/api/students/delete/" + d.students[i]._id + "'>Delete</a>"));
-                        $row.append($('<td/>').html("<button type='submit' class='btn btn-default' id='detail' onclick=SearchStudents('" + d.students[i]._id + "'>Detail</button><button onclick=fDelete('" + d.students[i]._id + "') class='btn btn-default'>Delete </button> "));
+                        $row.append($('<td/>').html("<button type='submit' class='btn btn-default' class='detail' onclick=SearchStudents('" + d.students[i]._id + "'>Detail</button><button onclick=fDelete('" + d.students[i]._id + "') class='btn btn-default'>Delete </button> "));
                         $data.append($row);
                     }
                     
@@ -143,29 +163,3 @@ function fDelete(deleteId) {
 }
 
 
-function SearchStudents(id) {
-    console.log(id);
-    window.location.href = '/Students/Details';
-    var studentI = {
-        id: id
-    };
-
-    $.ajax({
-        url: 'http://localhost:8383/api/students/search',
-        type: 'put',
-        dataType: 'json',
-        data: {
-            id: $('#id').val(),
-            '__RequestVerificationToken': $('input[name=__RequestVerificationToken]').val()
-        },
-        success: function (data) {
-            alert(data.message);
-            if (data.status) {
-                $dialog.dialog('close');
-            }
-        },
-        error: function () {
-            $('#msg').html('<div class="failed">Error ! Please try again.</div>');
-        }
-    });
-}
